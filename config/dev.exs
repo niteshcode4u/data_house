@@ -3,9 +3,9 @@ import Config
 # Configure your database
 config :data_house, DataHouse.Repo,
   username: "root",
-  password: "",
+  password: "mauFJcuf5dhRMQrjj",
   database: "data_house_dev",
-  hostname: "localhost",
+  port: 3307,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 

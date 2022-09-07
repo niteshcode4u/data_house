@@ -7,9 +7,10 @@ import Config
 # Run `mix help test` for more information.
 config :data_house, DataHouse.Repo,
   username: "root",
-  password: "",
-  database: "data_house_test#{System.get_env("MIX_TEST_PARTITION")}",
-  hostname: "localhost",
+  password: "mauFJcuf5dhRMQrjj",
+  database: "data_house_test",
+  port: 3307,
+  show_sensitive_data_on_connection_error: true,
   pool: Ecto.Adapters.SQL.Sandbox,
   pool_size: 10
 

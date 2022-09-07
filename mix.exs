@@ -4,7 +4,7 @@ defmodule DataHouse.MixProject do
   def project do
     [
       app: :data_house,
-      version: "0.1.0",
+      version: "0.1.1",
       elixir: "~> 1.12",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: Mix.compilers(),
@@ -42,7 +42,14 @@ defmodule DataHouse.MixProject do
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 1.0"},
       {:jason, "~> 1.2"},
-      {:plug_cowboy, "~> 2.5"}
+      {:plug_cowboy, "~> 2.5"},
+      {:httpoison, "~> 1.6.1"},
+      {:broadway, "~> 0.4.0"},
+      {:broadway_rabbitmq, "~> 0.4.0"},
+      {:gen_rmq, "~> 2.3.0"},
+      {:csv, "~> 2.4"},
+      {:redix, "~> 1.1"},
+      {:castore, ">= 0.0.0"}
     ]
   end
 
