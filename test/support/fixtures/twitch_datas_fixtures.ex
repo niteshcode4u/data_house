@@ -1,14 +1,14 @@
-defmodule DataHouse.ChannelsFixtures do
+defmodule DataHouse.TwitchDatasFixtures do
   @moduledoc """
   This module defines test helpers for creating
-  entities via the `DataHouse.Channels` context.
+  entities via the `DataHouse.TwitchDatas` context.
   """
 
   @doc """
-  Generate a channel.
+  Generate a twitch_data.
   """
-  def channel_fixture(attrs \\ %{}) do
-    {:ok, channel} =
+  def twitch_data_fixture(attrs \\ %{}) do
+    {:ok, twitch_data} =
       attrs
       |> Enum.into(%{
         avg_viewers: 42,
@@ -23,8 +23,8 @@ defmodule DataHouse.ChannelsFixtures do
         views_gained: 42,
         watch_time: 42
       })
-      |> DataHouse.Models.Channels.create_channel()
+      |> DataHouse.TwitchDatas.create_twitch_data()
 
-    channel
+    twitch_data
   end
 end

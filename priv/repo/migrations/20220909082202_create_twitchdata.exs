@@ -1,8 +1,8 @@
-defmodule DataHouse.Repo.Migrations.CreateChannels do
+defmodule DataHouse.Repo.Migrations.CreateTwitchdata do
   use Ecto.Migration
 
   def change do
-    create table(:channels) do
+    create table(:twitchdata) do
       add :channel, :string
       add :watch_time, :integer
       add :stream_time, :integer

@@ -1,8 +1,8 @@
-defmodule DataHouse.Schemas.Channel do
+defmodule DataHouse.TwitchDatas.TwitchData do
   use Ecto.Schema
   import Ecto.Changeset
 
-  schema "channels" do
+  schema "twitchdata" do
     field :avg_viewers, :integer
     field :channel, :string
     field :followers, :integer
@@ -19,8 +19,8 @@ defmodule DataHouse.Schemas.Channel do
   end
 
   @doc false
-  def changeset(channel, attrs) do
-    channel
+  def changeset(twitch_data, attrs) do
+    twitch_data
     |> cast(attrs, [
       :channel,
       :watch_time,
