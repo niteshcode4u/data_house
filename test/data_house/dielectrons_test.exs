@@ -6,7 +6,7 @@ defmodule DataHouse.DielectronsTest do
   describe "dielectron" do
     alias DataHouse.Schemas.Dielectron
 
-    import DataHouse.DielectronsFixtures
+    import DataHouse.Dielectrons.Fixtures
 
     @invalid_attrs %{
       e1: nil,

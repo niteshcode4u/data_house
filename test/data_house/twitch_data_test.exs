@@ -1,12 +1,12 @@
-defmodule DataHouse.TwitchDatasTest do
+defmodule DataHouse.TwitchDataTest do
   use DataHouse.DataCase
 
-  alias DataHouse.TwitchDatas
+  alias DataHouse.Models.TwitchData
 
   describe "twitchdata" do
-    alias DataHouse.TwitchDatas.TwitchData
+    alias DataHouse.Schemas.TwitchData, as: STwitchData
 
-    import DataHouse.TwitchDatasFixtures
+    import DataHouse.TwitchData.Fixtures
 
     @invalid_attrs %{
       avg_viewers: nil,
@@ -24,12 +24,12 @@ defmodule DataHouse.TwitchDatasTest do
 
     test "list_twitchdata/0 returns all twitchdata" do
       twitch_data = twitch_data_fixture()
-      assert TwitchDatas.list_twitchdata() == [twitch_data]
+      assert TwitchData.list_twitchdata() == [twitch_data]
     end
 
     test "get_twitch_data!/1 returns the twitch_data with given id" do
       twitch_data = twitch_data_fixture()
-      assert TwitchDatas.get_twitch_data!(twitch_data.id) == twitch_data
+      assert TwitchData.get_twitch_data!(twitch_data.id) == twitch_data
     end
 
     test "create_twitch_data/1 with valid data creates a twitch_data" do
@@ -47,7 +47,7 @@ defmodule DataHouse.TwitchDatasTest do
         watch_time: 42
       }
 
-      assert {:ok, %TwitchData{} = twitch_data} = TwitchDatas.create_twitch_data(valid_attrs)
+      assert {:ok, %STwitchData{} = twitch_data} = TwitchData.create_twitch_data(valid_attrs)
       assert twitch_data.avg_viewers == 42
       assert twitch_data.channel == "some channel"
       assert twitch_data.followers == 42
@@ -62,7 +62,7 @@ defmodule DataHouse.TwitchDatasTest do
     end
 
     test "create_twitch_data/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = TwitchDatas.create_twitch_data(@invalid_attrs)
+      assert {:error, %Ecto.Changeset{}} = TwitchData.create_twitch_data(@invalid_attrs)
     end
 
     test "update_twitch_data/2 with valid data updates the twitch_data" do
@@ -82,8 +82,8 @@ defmodule DataHouse.TwitchDatasTest do
         watch_time: 43
       }
 
-      assert {:ok, %TwitchData{} = twitch_data} =
-               TwitchDatas.update_twitch_data(twitch_data, update_attrs)
+      assert {:ok, %STwitchData{} = twitch_data} =
+               TwitchData.update_twitch_data(twitch_data, update_attrs)
 
       assert twitch_data.avg_viewers == 43
       assert twitch_data.channel == "some updated channel"
@@ -102,20 +102,20 @@ defmodule DataHouse.TwitchDatasTest do
       twitch_data = twitch_data_fixture()
 
       assert {:error, %Ecto.Changeset{}} =
-               TwitchDatas.update_twitch_data(twitch_data, @invalid_attrs)
+               TwitchData.update_twitch_data(twitch_data, @invalid_attrs)
 
-      assert twitch_data == TwitchDatas.get_twitch_data!(twitch_data.id)
+      assert twitch_data == TwitchData.get_twitch_data!(twitch_data.id)
     end
 
     test "delete_twitch_data/1 deletes the twitch_data" do
       twitch_data = twitch_data_fixture()
-      assert {:ok, %TwitchData{}} = TwitchDatas.delete_twitch_data(twitch_data)
-      assert_raise Ecto.NoResultsError, fn -> TwitchDatas.get_twitch_data!(twitch_data.id) end
+      assert {:ok, %STwitchData{}} = TwitchData.delete_twitch_data(twitch_data)
+      assert_raise Ecto.NoResultsError, fn -> TwitchData.get_twitch_data!(twitch_data.id) end
     end
 
     test "change_twitch_data/1 returns a twitch_data changeset" do
       twitch_data = twitch_data_fixture()
-      assert %Ecto.Changeset{} = TwitchDatas.change_twitch_data(twitch_data)
+      assert %Ecto.Changeset{} = TwitchData.change_twitch_data(twitch_data)
     end
   end
 end

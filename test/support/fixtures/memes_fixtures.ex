@@ -1,4 +1,4 @@
-defmodule DataHouse.MemesFixtures do
+defmodule DataHouse.Memes.Fixtures do
   @moduledoc """
   This module defines test helpers for creating
   entities via the `DataHouse.Memes` context.

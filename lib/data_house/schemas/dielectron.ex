@@ -2,7 +2,7 @@ defmodule DataHouse.Schemas.Dielectron do
   use Ecto.Schema
   import Ecto.Changeset
 
-  schema "dielectron" do
+  schema "dielectrons" do
     field :e1, :decimal
     field :e2, :decimal
     field :eta1, :decimal

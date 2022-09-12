@@ -6,7 +6,7 @@ defmodule DataHouse.MemesTest do
   describe "memes" do
     alias DataHouse.Schemas.Meme
 
-    import DataHouse.MemesFixtures
+    import DataHouse.Memes.Fixtures
 
     @invalid_attrs %{
       alt_text: nil,

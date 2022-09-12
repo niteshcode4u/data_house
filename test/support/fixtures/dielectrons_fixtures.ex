@@ -1,4 +1,4 @@
-defmodule DataHouse.DielectronsFixtures do
+defmodule DataHouse.Dielectrons.Fixtures do
   @moduledoc """
   This module defines test helpers for creating
   entities via the `DataHouse.Dielectrons` context.

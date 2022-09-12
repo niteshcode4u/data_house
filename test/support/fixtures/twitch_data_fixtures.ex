@@ -1,4 +1,4 @@
-defmodule DataHouse.TwitchDatasFixtures do
+defmodule DataHouse.TwitchData.Fixtures do
   @moduledoc """
   This module defines test helpers for creating
   entities via the `DataHouse.TwitchDatas` context.
@@ -23,7 +23,7 @@ defmodule DataHouse.TwitchDatasFixtures do
         views_gained: 42,
         watch_time: 42
       })
-      |> DataHouse.TwitchDatas.create_twitch_data()
+      |> DataHouse.Models.TwitchData.create_twitch_data()
 
     twitch_data
   end
