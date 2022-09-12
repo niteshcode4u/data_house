@@ -1,12 +1,12 @@
-defmodule DataHouse.TwitchDatas do
+defmodule DataHouse.Models.TwitchData do
   @moduledoc """
-  The TwitchDatas context.
+  The TwitchData context.
   """
 
   import Ecto.Query, warn: false
-  alias DataHouse.Repo
 
-  alias DataHouse.TwitchDatas.TwitchData
+  alias DataHouse.Repo
+  alias DataHouse.Schemas.TwitchData
 
   @doc """
   Returns the list of twitchdata.

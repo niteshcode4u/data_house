@@ -1,8 +1,8 @@
-defmodule DataHouse.TwitchDatas.TwitchData do
+defmodule DataHouse.Schemas.TwitchData do
   use Ecto.Schema
   import Ecto.Changeset
 
-  schema "twitchdata" do
+  schema "twitch_data" do
     field :avg_viewers, :integer
     field :channel, :string
     field :followers, :integer

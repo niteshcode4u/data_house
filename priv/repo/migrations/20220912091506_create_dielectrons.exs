@@ -2,9 +2,9 @@ defmodule DataHouse.Repo.Migrations.CreateDielectron do
   use Ecto.Migration
 
   def change do
-    create table(:dielectron) do
-      add :run, :integer
-      add :event, :integer
+    create table(:dielectrons) do
+      add :run, :bigint
+      add :event, :bigint
       add :e1, :decimal
       add :px1, :decimal
       add :py1, :decimal
@@ -12,7 +12,7 @@ defmodule DataHouse.Repo.Migrations.CreateDielectron do
       add :pt1, :decimal
       add :eta1, :decimal
       add :phi1, :decimal
-      add :q1, :integer
+      add :q1, :bigint
       add :e2, :decimal
       add :px2, :decimal
       add :py2, :decimal
@@ -25,5 +25,7 @@ defmodule DataHouse.Repo.Migrations.CreateDielectron do
 
       timestamps()
     end
+
+    create(index(:dielectrons, [:run, :event], unique: true))
   end
 end

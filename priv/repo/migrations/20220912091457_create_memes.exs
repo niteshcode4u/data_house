@@ -8,10 +8,12 @@ defmodule DataHouse.Repo.Migrations.CreateMemes do
       add :base_meme_name, :string
       add :meme_page_url, :string
       add :md5_hash, :string
-      add :file_size, :integer
+      add :file_size, :bigint
       add :alt_text, :string
 
       timestamps()
     end
+
+    create(index(:memes, [:meme_id], unique: true))
   end
 end
