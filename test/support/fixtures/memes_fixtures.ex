@@ -4,6 +4,8 @@ defmodule DataHouse.Memes.Fixtures do
   entities via the `DataHouse.Memes` context.
   """
 
+  alias DataHouse.Models.Memes
+
   @doc """
   Generate a meme.
   """
@@ -19,7 +21,7 @@ defmodule DataHouse.Memes.Fixtures do
         meme_id: "some meme_id",
         meme_page_url: "some meme_page_url"
       })
-      |> DataHouse.Models.Memes.create_meme()
+      |> Memes.create_meme()
 
     meme
   end

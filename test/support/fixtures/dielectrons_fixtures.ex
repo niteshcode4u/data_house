@@ -4,6 +4,8 @@ defmodule DataHouse.Dielectrons.Fixtures do
   entities via the `DataHouse.Dielectrons` context.
   """
 
+  alias DataHouse.Models.Dielectrons
+
   @doc """
   Generate a dielectron.
   """
@@ -31,7 +33,7 @@ defmodule DataHouse.Dielectrons.Fixtures do
         q2: "121",
         run: 42
       })
-      |> DataHouse.Models.Dielectrons.create_dielectron()
+      |> Dielectrons.create_dielectron()
 
     dielectron
   end

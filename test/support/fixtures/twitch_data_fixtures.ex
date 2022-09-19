@@ -4,6 +4,8 @@ defmodule DataHouse.TwitchData.Fixtures do
   entities via the `DataHouse.TwitchDatas` context.
   """
 
+  alias DataHouse.Models.TwitchData
+
   @doc """
   Generate a twitch_data.
   """
@@ -23,7 +25,7 @@ defmodule DataHouse.TwitchData.Fixtures do
         views_gained: 42,
         watch_time: 42
       })
-      |> DataHouse.Models.TwitchData.create_twitch_data()
+      |> TwitchData.create_twitch_data()
 
     twitch_data
   end

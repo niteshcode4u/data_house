@@ -1,4 +1,4 @@
-defmodule DataHouse.MemesTest do
+defmodule DataHouse.Models.MemesTest do
   use DataHouse.DataCase
 
   alias DataHouse.Models.Memes

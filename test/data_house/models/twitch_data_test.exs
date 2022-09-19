@@ -1,4 +1,4 @@
-defmodule DataHouse.TwitchDataTest do
+defmodule DataHouse.Models.TwitchDataTest do
   use DataHouse.DataCase
 
   alias DataHouse.Models.TwitchData

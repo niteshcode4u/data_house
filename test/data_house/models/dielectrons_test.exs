@@ -1,4 +1,4 @@
-defmodule DataHouse.DielectronsTest do
+defmodule DataHouse.Models.DielectronsTest do
   use DataHouse.DataCase
 
   alias DataHouse.Models.Dielectrons
