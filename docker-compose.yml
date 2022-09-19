@@ -1,0 +1,47 @@
+version: "3.2"
+services:
+  rabbit_mq:
+    image: rabbitmq:3-management-alpine
+    container_name: 'data_house_rabbitmq'
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - ~/.docker-conf/rabbit_mq/data/:/var/lib/rabbit_mq/
+      - ~/.docker-conf/rabbit_mq/log/:/var/log/rabbit_mq
+    networks:
+      - rabbit_mq_go_net
+  redis:
+    image: redis:6.2-alpine
+    container_name: 'data_house_redis'
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server --save 20 1 --loglevel warning
+    volumes:
+      - redis:/data
+  db:
+    image: mysql:8.0
+    container_name: 'data_house_db'
+    cap_add:
+      - SYS_NICE
+    restart: always
+    environment:
+      - MYSQL_DATABASE=data_house_dev
+      - MYSQL_ROOT_PASSWORD=mauFJcuf5dhRMQrjj
+    ports:
+      - '3307:3306'
+    volumes:
+      - db:/var/lib/mysql
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+volumes:
+  db:
+    driver: local
+  redis:
+    driver: local
+  deps:
+  _build:
+
+networks:
+  rabbit_mq_go_net:
+    driver: bridge

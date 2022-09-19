@@ -1,0 +1,9 @@
+{
+  "skip_files": [
+    "lib/data_house/application.ex",
+    "lib/data_house_web/endpoint.ex",
+    "lib/data_house_web/telemetry.ex",
+    "lib/data_house_web.ex",
+    "lib/data_house_web/views/error_helpers.ex"
+  ]
+}

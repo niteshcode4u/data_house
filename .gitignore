@@ -23,5 +23,4 @@ erl_crash.dump
 data_house-*.tar
 
 # Ignore if log file is getting generated
-*.log
-
+/log/
