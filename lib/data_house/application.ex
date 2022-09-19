@@ -5,19 +5,26 @@ defmodule DataHouse.Application do
 
   use Application
 
+  alias DataHouse.Services.Publisher
+  alias DataHouse.Services.Subscribers.DielectronSubscriber
+  alias DataHouse.Services.Subscribers.MemeSubscriber
+  alias DataHouse.Services.Subscribers.TwitchdataSubscriber
+
+  @redis_host Application.compile_env!(:data_house, :redix)[:host]
+  @redis_port Application.compile_env!(:data_house, :redix)[:port]
+
   @impl true
   def start(_type, _args) do
     children = [
-      # Start the Ecto repository
       DataHouse.Repo,
-      # Start the Telemetry supervisor
+      %{id: Publisher, start: {Publisher, :start_link, []}},
+      DielectronSubscriber,
+      MemeSubscriber,
+      TwitchdataSubscriber,
+      {Redix, host: @redis_host, port: @redis_port, name: :redix},
       DataHouseWeb.Telemetry,
-      # Start the PubSub system
       {Phoenix.PubSub, name: DataHouse.PubSub},
-      # Start the Endpoint (http/https)
       DataHouseWeb.Endpoint
-      # Start a worker by calling: DataHouse.Worker.start_link(arg)
-      # {DataHouse.Worker, arg}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
