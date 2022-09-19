@@ -13,4 +13,8 @@ defmodule DataHouseWeb.ErrorView do
   def template_not_found(template, _assigns) do
     %{errors: %{detail: Phoenix.Controller.status_message_from_template(template)}}
   end
+
+  def render("404.json", %{error: :not_found}) do
+    %{error: "Invalid data set query. Please verify and send again!!"}
+  end
 end
