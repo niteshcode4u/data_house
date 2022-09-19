@@ -22,6 +22,24 @@ defmodule DataHouse.Models.Memes do
   end
 
   @doc """
+  Returns the list of memes.
+
+  ## Examples
+
+      iex> list_memes_by_meme_id(memes)
+      [%Meme{}, ...]
+
+      iex> list_memes_by_meme_id(memes)
+      []
+
+  """
+  def list_memes_by_meme_id(meme_ids) do
+    query = from m in Meme, where: m.meme_id in ^meme_ids, select: m.meme_id
+
+    Repo.all(query)
+  end
+
+  @doc """
   Gets a single meme.
 
   Raises `Ecto.NoResultsError` if the Meme does not exist.
@@ -53,6 +71,22 @@ defmodule DataHouse.Models.Memes do
     %Meme{}
     |> Meme.changeset(attrs)
     |> Repo.insert()
+  end
+
+  @doc """
+  Creates a multiple memes.
+
+  ## Examples
+
+      iex> insert_all([%{field: value}])
+      {1, nil}
+
+      iex> insert_all([%{field: bad_value}])
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def insert_all(attrs) do
+    Repo.insert_all(Meme, attrs)
   end
 
   @doc """

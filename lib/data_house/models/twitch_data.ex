@@ -9,19 +9,6 @@ defmodule DataHouse.Models.TwitchData do
   alias DataHouse.Schemas.TwitchData
 
   @doc """
-  Returns the list of twitchdata.
-
-  ## Examples
-
-      iex> list_twitchdata()
-      [%TwitchData{}, ...]
-
-  """
-  def list_twitchdata do
-    Repo.all(TwitchData)
-  end
-
-  @doc """
   Gets a single twitch_data.
 
   Raises `Ecto.NoResultsError` if the Twitch data does not exist.
@@ -36,6 +23,37 @@ defmodule DataHouse.Models.TwitchData do
 
   """
   def get_twitch_data!(id), do: Repo.get!(TwitchData, id)
+
+  @doc """
+  Returns the list of twitchdata.
+
+  ## Examples
+
+      iex> list_twitchdata()
+      [%TwitchData{}, ...]
+
+  """
+  def list_twitchdata do
+    Repo.all(TwitchData)
+  end
+
+  @doc """
+  Returns the list of twitchdata based on filter with channels.
+
+  ## Examples
+
+      iex> list_twitchdata_by_channels(channels)
+      [%TwitchData{}, ...]
+
+      iex> list_twitchdata_by_channels(channels)
+      []
+
+  """
+  def list_twitchdata_by_channels(channels) do
+    query = from t in TwitchData, where: t.channel in ^channels, select: t.channel
+
+    Repo.all(query)
+  end
 
   @doc """
   Creates a twitch_data.
@@ -53,6 +71,22 @@ defmodule DataHouse.Models.TwitchData do
     %TwitchData{}
     |> TwitchData.changeset(attrs)
     |> Repo.insert()
+  end
+
+  @doc """
+  Creates a multiple twitch_data.
+
+  ## Examples
+
+      iex> insert_all([%{field: value}])
+      {1, nil}
+
+      iex> insert_all([%{field: bad_value}])
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def insert_all(attrs) do
+    Repo.insert_all(TwitchData, attrs)
   end
 
   @doc """

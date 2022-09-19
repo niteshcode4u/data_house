@@ -22,6 +22,25 @@ defmodule DataHouse.Models.Dielectrons do
   end
 
   @doc """
+  Returns the list of dielectron.
+
+  ## Examples
+
+      iex> list_dielectron()
+      [%Dielectron{}, ...]
+
+      iex> list_dielectron()
+      []
+
+  """
+  def list_dielectrons_by_run_n_event({runs, events}) do
+    query =
+      from d in Dielectron, where: d.run in ^runs and d.event in ^events, select: [d.run, d.event]
+
+    Repo.all(query)
+  end
+
+  @doc """
   Gets a single dielectron.
 
   Raises `Ecto.NoResultsError` if the Dielectron does not exist.
@@ -53,6 +72,22 @@ defmodule DataHouse.Models.Dielectrons do
     %Dielectron{}
     |> Dielectron.changeset(attrs)
     |> Repo.insert()
+  end
+
+  @doc """
+  Creates a multiple dielectron.
+
+  ## Examples
+
+      iex> insert_all([%{field: value}])
+      {1, nil}
+
+      iex> insert_all([%{field: bad_value}])
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def insert_all(attrs) do
+    Repo.insert_all(Dielectron, attrs)
   end
 
   @doc """
