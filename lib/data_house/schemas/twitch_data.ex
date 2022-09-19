@@ -1,4 +1,5 @@
 defmodule DataHouse.Schemas.TwitchData do
+  @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
 
