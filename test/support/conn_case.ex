@@ -17,6 +17,9 @@ defmodule DataHouseWeb.ConnCase do
 
   use ExUnit.CaseTemplate
 
+  alias DataHouse.Services.Publisher
+  alias Ecto.Adapters.SQL.Sandbox
+
   using do
     quote do
       # Import conveniences for testing with connections
@@ -32,8 +35,24 @@ defmodule DataHouseWeb.ConnCase do
   end
 
   setup tags do
-    pid = Ecto.Adapters.SQL.Sandbox.start_owner!(DataHouse.Repo, shared: not tags[:async])
-    on_exit(fn -> Ecto.Adapters.SQL.Sandbox.stop_owner(pid) end)
+    pid = Sandbox.start_owner!(DataHouse.Repo, shared: not tags[:async])
+
+    on_exit(fn ->
+      Sandbox.stop_owner(pid)
+
+      Redix.command!(:redix, ["FLUSHALL"])
+
+      queues = [
+        Publisher.dielectrons_queue_name(),
+        Publisher.memes_queue_name(),
+        Publisher.twitchdata_queue_name()
+      ]
+
+      Enum.each(queues, fn queue ->
+        GenRMQ.Publisher.purge(Publisher, queue)
+      end)
+    end)
+
     {:ok, conn: Phoenix.ConnTest.build_conn()}
   end
 end

@@ -16,6 +16,9 @@ defmodule DataHouse.DataCase do
 
   use ExUnit.CaseTemplate
 
+  alias DataHouse.Services.Publisher
+  alias Ecto.Adapters.SQL.Sandbox
+
   using do
     quote do
       alias DataHouse.Repo
@@ -28,24 +31,24 @@ defmodule DataHouse.DataCase do
   end
 
   setup tags do
-    pid = Ecto.Adapters.SQL.Sandbox.start_owner!(DataHouse.Repo, shared: not tags[:async])
-    on_exit(fn -> Ecto.Adapters.SQL.Sandbox.stop_owner(pid) end)
-    :ok
-  end
+    pid = Sandbox.start_owner!(DataHouse.Repo, shared: not tags[:async])
 
-  @doc """
-  A helper that transforms changeset errors into a map of messages.
+    on_exit(fn ->
+      Sandbox.stop_owner(pid)
 
-      assert {:error, changeset} = Accounts.create_user(%{password: "short"})
-      assert "password is too short" in errors_on(changeset).password
-      assert %{password: ["password is too short"]} = errors_on(changeset)
+      Redix.command!(:redix, ["FLUSHALL"])
 
-  """
-  def errors_on(changeset) do
-    Ecto.Changeset.traverse_errors(changeset, fn {message, opts} ->
-      Regex.replace(~r"%{(\w+)}", message, fn _, key ->
-        opts |> Keyword.get(String.to_existing_atom(key), key) |> to_string()
+      queues = [
+        Publisher.dielectrons_queue_name(),
+        Publisher.memes_queue_name(),
+        Publisher.twitchdata_queue_name()
+      ]
+
+      Enum.each(queues, fn queue ->
+        GenRMQ.Publisher.purge(Publisher, queue)
       end)
     end)
+
+    :ok
   end
 end
