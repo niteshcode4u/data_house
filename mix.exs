@@ -10,7 +10,14 @@ defmodule DataHouse.MixProject do
       compilers: Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.post": :test,
+        "coveralls.html": :test
+      ]
     ]
   end
 
@@ -20,7 +27,7 @@ defmodule DataHouse.MixProject do
   def application do
     [
       mod: {DataHouse.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :ex_machina]
     ]
   end
 
@@ -47,9 +54,12 @@ defmodule DataHouse.MixProject do
       {:broadway, "~> 0.4.0"},
       {:broadway_rabbitmq, "~> 0.4.0"},
       {:gen_rmq, "~> 2.3.0"},
-      {:csv, "~> 2.4"},
       {:redix, "~> 1.1"},
-      {:castore, ">= 0.0.0"}
+      {:castore, ">= 0.0.0"},
+      {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
+      {:ex_machina, "~> 2.7.0"},
+      {:excoveralls, "~> 0.10", only: :test},
+      {:faker, "~> 0.17", only: :test}
     ]
   end
 
