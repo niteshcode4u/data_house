@@ -10,8 +10,20 @@ import Config
 # which you should run after static files are built and
 # before starting your production server.
 config :data_house, DataHouseWeb.Endpoint,
-  url: [host: "example.com", port: 80],
+  url: [
+    host: System.get_env("APP_HOST", "localhost"),
+    port: String.to_integer(System.get_env("APP_PORT) || "80")
+  ],
   cache_static_manifest: "priv/static/cache_manifest.json"
+
+# Configure your database
+config :data_house, DataHouse.Repo,
+  username: System.get_env("DB_USERNAME", "root"),
+  password: System.get_env("DB_PASSWORD", "mauFJcuf5dhRMQrjj"),
+  database: System.get_env("DB_NAME", "data_house_dev"),
+  port: String.to_integer(System.get_env("DB_PORT") || "3307"),
+  show_sensitive_data_on_connection_error: true,
+  pool_size: 10
 
 # Do not print debug messages in production
 config :logger, level: :info
